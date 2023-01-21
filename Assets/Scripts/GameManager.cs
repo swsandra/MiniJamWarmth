@@ -80,7 +80,6 @@ public class GameManager : MonoBehaviour
         float max = totalFactories;
         float min = 0;
         RedAlpha = (value-min)/(max-min);
-        Debug.Log("Alpha: "+RedAlpha);
     }
 
     IEnumerator CountDownRoutine() {

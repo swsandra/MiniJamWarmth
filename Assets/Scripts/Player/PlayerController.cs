@@ -12,12 +12,13 @@ public class PlayerController : MonoBehaviour
     Vector3 botLeft;
     Vector3 halfWidth;
     Rigidbody2D rb;
-    float movX;
-    float movY;
+    Vector2 movement;
     bool canStomp;
+    Animator animator;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         // Bottom left point of sprite
         botLeft = spriteRenderer.transform.TransformPoint(spriteRenderer.sprite.bounds.min);
@@ -26,34 +27,53 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        rb.velocity = new Vector2(movX, movY) * speed;
+        rb.velocity = movement * speed;
     }
 
     private void OnMove(InputValue movementValue) {
         Vector2 movementVector = movementValue.Get<Vector2>();
-        movX = movementVector.x;
-        movY = movementVector.y;
+        movement = new Vector2(movementVector.x, movementVector.y);
+        if (movement.x < 0) {
+            spriteRenderer.flipX = true;
+        } else {
+            spriteRenderer.flipX = false;
+        }
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Speed", movement.sqrMagnitude);
     }
 
     private void OnFire(){
         botLeft = spriteRenderer.transform.TransformPoint(spriteRenderer.sprite.bounds.min);
-        Collider2D col = Physics2D.OverlapArea(botLeft, transform.position + halfWidth);
-        if (col && col.CompareTag("Enemy") && canStomp){ // Check Collision
-            Stomp(col.GetComponent<Enemy>());
+        Collider2D[] cols = Physics2D.OverlapAreaAll(botLeft, transform.position + halfWidth);
+        for (int i=0; i < cols.Length; i++){
+            if (cols[i] && cols[i].CompareTag("Enemy") && canStomp){ // Check Collision
+                Stomp(cols[i].GetComponent<Enemy>());
+                return;
+            }
         }
     }
 
     void Stomp(Enemy enemy){
         Debug.Log("Stomp");
+        animator.SetBool("IsStomping", true);
         enemy.TakeDamage();
         canStomp = false;
-        StartCoroutine(StompCooldown());
+        // StartCoroutine(StompCooldown());
     }
 
-    IEnumerator StompCooldown(){
-        yield return new WaitForSeconds(1/stompRate);
+    void StopStomp(){
+        Debug.Log("Stoping stomp");
+        animator.SetBool("IsStomping", false);
         canStomp = true;
     }
+
+    // IEnumerator StompCooldown(){
+    //     Debug.Log("Stomp cooldown");
+    //     yield return new WaitForSeconds(1/stompRate);
+    //     Debug.Log("Finish tomp cooldown");
+    //     canStomp = true;
+    // }
 
     public void GameOver(){
         rb.velocity = Vector2.zero;
