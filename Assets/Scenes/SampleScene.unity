@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  stompRate: 1
+  stompRate: 0.5
 --- !u!50 &856036331
 Rigidbody2D:
   serializedVersion: 4
@@ -504,7 +504,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a934f2613f6f3494fa7d1d482a94590d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  years: 0
+  score: 0
+  years: 10
+  totalFactories: 0
+  redAlpha: 0
 --- !u!4 &1778328894
 Transform:
   m_ObjectHideFlags: 0
@@ -580,13 +583,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9052e44681aeb3949ba66d0d54817a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 1
-  maxHealth: 2
-  minHealth: 1
+  spawnRate: 0.9
   enemyPrefab:
   - {fileID: 7734895331479622500, guid: b9083c6d8aa93884e869580f86c7a24d, type: 3}
+  maxHealth: 1
+  minHealth: 1
   bottomLeft: {x: -7.52, y: -3.47, z: 0}
   topRight: {x: 7.51, y: 3.46, z: 0}
+  initialWait: 10
+  initialEnemies: 4
 --- !u!4 &2050660694
 Transform:
   m_ObjectHideFlags: 0

@@ -5,15 +5,27 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    [SerializeField] int score;
     [Header("Timer")]
     [SerializeField] int years;
-    int score;
+    [Header("World")]
+    [SerializeField] int totalFactories;
+    [SerializeField] float redAlpha;
 
     public int Score {
         get => score;
         set {
             score = value;
             // UIManager.Instance.UpdateUIScore(score);
+            UpdateRedAlpha();
+        }
+    }
+
+    public int TotalFactories {
+        get => totalFactories;
+        set {
+            totalFactories = value;
+            UpdateRedAlpha();
         }
     }
 
@@ -21,16 +33,17 @@ public class GameManager : MonoBehaviour
         if (instance == null) {
             instance = this;
         }
+        totalFactories = 0;
+        score = 0;
     }
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void UpdateRedAlpha() {
+        if (totalFactories <= 0) return;
+        float value = totalFactories - score;
+        float max = totalFactories;
+        float min = 0;
+        float newAlpha = (value-min)/(max-min);
+        Debug.Log("Alpha: "+newAlpha);
+        // TODO: UIManager update alpha
     }
 }
