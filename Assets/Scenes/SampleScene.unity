@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  stompRate: 0.5
+  stompRate: 2
 --- !u!50 &856036331
 Rigidbody2D:
   serializedVersion: 4
@@ -504,7 +504,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a934f2613f6f3494fa7d1d482a94590d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 856036334}
   score: 0
+  goodEndingPercentage: 70
+  normalEndingPercentage: 30
   years: 30
   time: 10
   yearsPerSecond: 0

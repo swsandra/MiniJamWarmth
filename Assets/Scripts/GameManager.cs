@@ -5,9 +5,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    [SerializeField] Transform player;
     [Header("Score")]
     [SerializeField] int score;
-    // TODO: add percentages for each final
+    [SerializeField] float goodEndingPercentage;
+    [SerializeField] float normalEndingPercentage;
     [Header("Timer")]
     [SerializeField] int years;
     [SerializeField] int time;
@@ -30,6 +32,14 @@ public class GameManager : MonoBehaviour
         set {
             totalFactories = value;
             UpdateRedAlpha();
+        }
+    }
+
+    public float RedAlpha {
+        get => redAlpha;
+        set {
+            redAlpha = value;
+            // TODO: UIManager update alpha
         }
     }
 
@@ -69,9 +79,8 @@ public class GameManager : MonoBehaviour
         float value = totalFactories - score;
         float max = totalFactories;
         float min = 0;
-        float newAlpha = (value-min)/(max-min);
-        Debug.Log("Alpha: "+newAlpha);
-        // TODO: UIManager update alpha
+        RedAlpha = (value-min)/(max-min);
+        Debug.Log("Alpha: "+RedAlpha);
     }
 
     IEnumerator CountDownRoutine() {
@@ -91,6 +100,14 @@ public class GameManager : MonoBehaviour
 
     [ContextMenu("Game Over")]
     void GameOver() {
-        Debug.Log("Game Over, pick final");
+        player.GetComponent<PlayerController>().GameOver();
+        float completion = (1-RedAlpha);
+        if (completion >= goodEndingPercentage/100){
+            Debug.Log("Good ending: "+completion);
+        } else if (completion >= normalEndingPercentage/100){
+            Debug.Log("Normal ending: "+completion);
+        } else {
+            Debug.Log("Bad ending: "+completion);
+        }
     }
 }

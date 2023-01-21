@@ -54,4 +54,10 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1/stompRate);
         canStomp = true;
     }
+
+    public void GameOver(){
+        rb.velocity = Vector2.zero;
+        GetComponent<PlayerController>().enabled = false;
+        GetComponent<PlayerInput>().enabled = false;
+    }
 }
