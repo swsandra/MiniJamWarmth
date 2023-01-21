@@ -38,11 +38,14 @@ public class PlayerController : MonoBehaviour
     private void OnFire(){
         Collider2D col = Physics2D.OverlapArea(botLeft, transform.position + halfWidth);
         if (col && col.CompareTag("Enemy") && canStomp){ // Check Collision
-            Debug.Log("Stomp");
-            canStomp = false;
-            StartCoroutine(StompCooldown());
+            Stomp(col.GetComponent<Enemy>());
         }
-        
+    }
+
+    void Stomp(Enemy enemy){
+        enemy.TakeDamage();
+        canStomp = false;
+        StartCoroutine(StompCooldown());
     }
 
     IEnumerator StompCooldown(){
