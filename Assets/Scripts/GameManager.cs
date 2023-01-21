@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [Header("Timer")]
     [SerializeField] int years;
     [SerializeField] int time;
+    [SerializeField] float yearsPerSecond;
     [Header("World")]
     [SerializeField] int totalFactories;
     [SerializeField] float redAlpha;
@@ -40,16 +41,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int Years {
+        get => years;
+        set {
+            years = value;
+            // UIManager.instance.UpdateUIYears(years);
+        }
+    }
+
     private void Awake() {
         if (instance == null) {
             instance = this;
         }
         totalFactories = 0;
         score = 0;
+        
     }
 
     private void Start() {
+        yearsPerSecond = (float)time/(float)years;
         StartCoroutine(CountDownRoutine());
+        StartCoroutine(CountDownYearsRoutine());
     }
 
     public void UpdateRedAlpha() {
@@ -68,6 +80,13 @@ public class GameManager : MonoBehaviour
             Time--;
         }
         GameOver();
+    }
+
+    IEnumerator CountDownYearsRoutine() {
+        while(years >= 0) {
+            yield return new WaitForSeconds(yearsPerSecond);
+            Years--;
+        }
     }
 
     [ContextMenu("Game Over")]

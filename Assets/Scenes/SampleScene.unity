@@ -505,7 +505,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  years: 10
+  years: 30
+  time: 10
+  yearsPerSecond: 0
   totalFactories: 0
   redAlpha: 0
 --- !u!4 &1778328894
@@ -590,7 +592,7 @@ MonoBehaviour:
   minHealth: 1
   bottomLeft: {x: -7.52, y: -3.47, z: 0}
   topRight: {x: 7.51, y: 3.46, z: 0}
-  initialWait: 10
+  initialWait: 5
   initialEnemies: 4
 --- !u!4 &2050660694
 Transform:

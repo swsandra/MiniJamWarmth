@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemyCoroutine(){
         yield return new WaitForSeconds(initialWait);
-        while (true){
+        while (GameManager.instance.Time > 0){
             yield return new WaitForSeconds(1/spawnRate);
             SpawnEnemy();
         }
