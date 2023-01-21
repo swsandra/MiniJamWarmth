@@ -15,5 +15,6 @@ public class Enemy : MonoBehaviour
 
     public void Kill(){
         Destroy(gameObject, .1f);
+        GameManager.instance.Score += 1;
     }
 }
