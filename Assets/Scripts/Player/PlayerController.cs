@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnFire(){
+        botLeft = spriteRenderer.transform.TransformPoint(spriteRenderer.sprite.bounds.min);
         Collider2D col = Physics2D.OverlapArea(botLeft, transform.position + halfWidth);
         if (col && col.CompareTag("Enemy") && canStomp){ // Check Collision
             Stomp(col.GetComponent<Enemy>());
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void Stomp(Enemy enemy){
+        Debug.Log("Stomp");
         enemy.TakeDamage();
         canStomp = false;
         StartCoroutine(StompCooldown());
