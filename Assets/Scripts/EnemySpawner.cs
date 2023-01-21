@@ -21,7 +21,8 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnEnemy(){
         while (true){
             yield return new WaitForSeconds(1/spawnRate);
-            int randomHealth = Random.Range(minHealth, maxHealth);
+            int randomHealth = Random.Range(minHealth, maxHealth+1);
+            // TODO: fix que no hagan spawn encima de otros
             randomPosition = new Vector3(Random.Range(bottomLeft.x, topRight.x), Random.Range(bottomLeft.y, topRight.y), 0);
             GameObject go = Instantiate(enemyPrefab[Random.Range(0, enemyPrefab.Length)], randomPosition, Quaternion.identity);
             go.GetComponent<Enemy>().health = randomHealth;
