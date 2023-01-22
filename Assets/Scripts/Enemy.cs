@@ -7,9 +7,16 @@ public class Enemy : MonoBehaviour
     public int health = 1;
     [SerializeField] GameObject explosionPrefab;
     [SerializeField] AudioClip explosionSound;
+    CameraController camController;
+
+    private void Start() {
+        camController = FindObjectOfType<CameraController>();
+        Debug.Log("Cam controller "+camController);
+    }
 
     public void TakeDamage(){
         health--;
+        camController.Shake();
         if (health <= 0){
             Kill();
         }
