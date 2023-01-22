@@ -46,24 +46,25 @@ public class PlayerController : MonoBehaviour
     private void OnFire(){
         botLeft = spriteRenderer.transform.TransformPoint(spriteRenderer.sprite.bounds.min);
         Collider2D[] cols = Physics2D.OverlapAreaAll(botLeft, transform.position + halfWidth);
-        for (int i=0; i < cols.Length; i++){
-            if (cols[i] && cols[i].CompareTag("Enemy") && canStomp){ // Check Collision
-                Stomp(cols[i].GetComponent<Enemy>());
-                return;
+        if (canStomp){
+            StompAnimation();
+            // Attack enemies
+            for (int i=0; i < cols.Length; i++){
+                if (cols[i] && cols[i].CompareTag("Enemy")){ // Check Collision
+                    cols[i].GetComponent<Enemy>().TakeDamage();;
+                }
             }
         }
     }
 
-    void Stomp(Enemy enemy){
+    void StompAnimation(){
         Debug.Log("Stomp");
         animator.SetBool("IsStomping", true);
-        enemy.TakeDamage();
         canStomp = false;
-        // StartCoroutine(StompCooldown());
     }
 
     void StopStomp(){
-        Debug.Log("Stoping stomp");
+        Debug.Log("Stopping stomp");
         animator.SetBool("IsStomping", false);
         canStomp = true;
     }

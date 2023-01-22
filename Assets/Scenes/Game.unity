@@ -4590,7 +4590,7 @@ MonoBehaviour:
   goodEndingPercentage: 70
   normalEndingPercentage: 30
   years: 30
-  time: 10
+  time: 30
   yearsPerSecond: 0
   totalFactories: 0
   redAlpha: 0
