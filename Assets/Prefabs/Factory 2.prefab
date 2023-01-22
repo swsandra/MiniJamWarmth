@@ -127,3 +127,5 @@ MonoBehaviour:
   health: 1
   explosionPrefab: {fileID: 952068532547642253, guid: 6faa593ae2949dc41850652da4fa53b7, type: 3}
   explosionSound: {fileID: 8300000, guid: caab0f4c0ea819442be5204cbd5f7fca, type: 3}
+  invincibleDuration: 0.2
+  flashMaterial: {fileID: 2100000, guid: 38e026d401f68a44cb35b74a16aebdba, type: 2}
