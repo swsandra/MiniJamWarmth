@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] float stompRate;
+    [SerializeField] AudioClip stompSound;
+    [SerializeField] AudioSource audioSource;
     SpriteRenderer spriteRenderer;
     Vector3 botLeft;
     Vector3 halfWidth;
@@ -61,6 +63,10 @@ public class PlayerController : MonoBehaviour
         // Debug.Log("Stomp");
         animator.SetBool("IsStomping", true);
         canStomp = false;
+    }
+
+    public void playStomp(){
+        audioSource.PlayOneShot(stompSound);
     }
 
     void StopStomp(){

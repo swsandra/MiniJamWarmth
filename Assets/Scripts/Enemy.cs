@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public int health = 1;
     [SerializeField] GameObject explosionPrefab;
+    [SerializeField] AudioClip explosionSound;
 
     public void TakeDamage(){
         health--;
@@ -17,6 +18,7 @@ public class Enemy : MonoBehaviour
     public void Kill(){
         Destroy(gameObject, .1f);
         GameObject go = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        // AudioSource.PlayClipAtPoint(explosionSound, transform.position);
         GameManager.instance.Score += 1;
     }
 }
