@@ -58,13 +58,13 @@ public class PlayerController : MonoBehaviour
     }
 
     void StompAnimation(){
-        Debug.Log("Stomp");
+        // Debug.Log("Stomp");
         animator.SetBool("IsStomping", true);
         canStomp = false;
     }
 
     void StopStomp(){
-        Debug.Log("Stopping stomp");
+        // Debug.Log("Stopping stomp");
         animator.SetBool("IsStomping", false);
         canStomp = true;
     }

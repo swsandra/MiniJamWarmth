@@ -42,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
             yRandomPos = Random.Range(bottomLeft.y, topRight.y);
             Collider2D[] cols = Physics2D.OverlapBoxAll(new Vector3(xRandomPos, yRandomPos, 0), halfEnemySize, 0f);
             for (int i=0; i < cols.Length; i++){
-                if (cols[i].CompareTag("Obstacle")){ // Check Collision
+                if (cols[i].CompareTag("Obstacle") || cols[i].CompareTag("Enemy")){ // Check Collision
                     Debug.Log("Not valid position");
                     validPosition = false;
                 }
