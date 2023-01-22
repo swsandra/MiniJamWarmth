@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
         get => score;
         set {
             score = value;
-            // UIManager.Instance.UpdateUIScore(score);
+            UIManager.instance.UpdateUIScore(score);
             UpdateRedAlpha();
         }
     }
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         get => redAlpha;
         set {
             redAlpha = value;
-            // TODO: UIManager update alpha
+            UIManager.instance.UpdateUIPlanet(redAlpha);
         }
     }
 
@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
         get => time;
         set {
             time = value;
-            // UIManager.instance.UpdateUITime(time);
         }
     }
 
@@ -55,7 +54,7 @@ public class GameManager : MonoBehaviour
         get => years;
         set {
             years = value;
-            // UIManager.instance.UpdateUIYears(years);
+            UIManager.instance.UpdateUIYears(years);
         }
     }
 
@@ -69,6 +68,9 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start() {
+        UIManager.instance.UpdateUIScore(score);
+        UIManager.instance.UpdateUIYears(years);
+
         yearsPerSecond = (float)time/(float)years;
         StartCoroutine(CountDownRoutine());
         StartCoroutine(CountDownYearsRoutine());
@@ -83,7 +85,7 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator CountDownRoutine() {
-        while(time >= 0) {
+        while(time > 0) {
             yield return new WaitForSeconds(1);
             Time--;
         }
@@ -91,7 +93,7 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator CountDownYearsRoutine() {
-        while(years >= 0) {
+        while(years > 0) {
             yield return new WaitForSeconds(yearsPerSecond);
             Years--;
         }
