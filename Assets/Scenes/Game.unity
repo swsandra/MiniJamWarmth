@@ -743,7 +743,7 @@ GameObject:
   - component: {fileID: 554644573}
   m_Layer: 0
   m_Name: Obstacles
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14232,7 +14232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnRate: 0.9
-  enemyPrefab:
+  enemyPrefabs:
   - {fileID: 7734895331479622500, guid: b9083c6d8aa93884e869580f86c7a24d, type: 3}
   - {fileID: 7734895331479622500, guid: ddeb5dadcb08d5341a8ad627f278e680, type: 3}
   - {fileID: 7734895331479622500, guid: 91cd5ca6ea2be7148a340e94df1618a4, type: 3}

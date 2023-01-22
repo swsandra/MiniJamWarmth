@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public float spawnRate = 1;
-    [SerializeField] GameObject[] enemyPrefab;
+    [SerializeField] GameObject[] enemyPrefabs;
     [Header("Health")]
     [SerializeField] int maxHealth;
     [SerializeField] int minHealth;
@@ -15,8 +15,9 @@ public class EnemySpawner : MonoBehaviour
     [Header("Other")]
     [SerializeField] int initialWait;
     [SerializeField] int initialEnemies;
-    Vector3 randomPosition;
     int randomHealth;
+    float xRandomPos;
+    float yRandomPos;
     
 
     void Start()
@@ -29,9 +30,25 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy(){
         randomHealth = Random.Range(minHealth, maxHealth+1);
-        // TODO: fix que no hagan spawn encima de otros
-        randomPosition = new Vector3(Random.Range(bottomLeft.x, topRight.x), Random.Range(bottomLeft.y, topRight.y), 0);
-        GameObject go = Instantiate(enemyPrefab[Random.Range(0, enemyPrefab.Length)], randomPosition, Quaternion.identity);
+        GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+        float xSize = enemyPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
+        float ySize = enemyPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
+        Vector2 halfEnemySize = new Vector2(xSize/2, ySize/2);
+        // TODO: fix que no hagan spawn encima de otras fabricas
+        bool validPosition = false;
+        while (!validPosition){
+            validPosition = true;
+            xRandomPos = Random.Range(bottomLeft.x, topRight.x);
+            yRandomPos = Random.Range(bottomLeft.y, topRight.y);
+            Collider2D[] cols = Physics2D.OverlapBoxAll(new Vector3(xRandomPos, yRandomPos, 0), halfEnemySize, 0f);
+            for (int i=0; i < cols.Length; i++){
+                if (cols[i].CompareTag("Obstacle")){ // Check Collision
+                    Debug.Log("Not valid position");
+                    validPosition = false;
+                }
+            }
+        }
+        GameObject go = Instantiate(enemyPrefab, new Vector3(xRandomPos, yRandomPos, 0), Quaternion.identity);
         go.GetComponent<Enemy>().health = randomHealth;
         GameManager.instance.TotalFactories += 1;
     }

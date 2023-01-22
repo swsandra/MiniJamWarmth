@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             StompAnimation();
             // Attack enemies
             for (int i=0; i < cols.Length; i++){
-                if (cols[i] && cols[i].CompareTag("Enemy")){ // Check Collision
+                if (cols[i].CompareTag("Enemy")){ // Check Collision
                     cols[i].GetComponent<Enemy>().TakeDamage();;
                 }
             }
