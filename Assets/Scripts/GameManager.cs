@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
     [Header("World")]
     [SerializeField] int totalFactories;
     [SerializeField] float redAlpha;
+    [Header("Endings")]
+    [SerializeField] GameObject goodEndingScreen;
+    [SerializeField] GameObject normalEndingScreen;
+    [SerializeField] GameObject badEndingScreen;
+    [SerializeField] GameObject gameOverCommon;
 
     public int Score {
         get => score;
@@ -102,13 +107,17 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Game Over")]
     void GameOver() {
         player.GetComponent<PlayerController>().GameOver();
+        UIManager.instance.UpdateUIGameOver(Score, TotalFactories);
+        gameOverCommon.SetActive(true);
         float completion = (1-RedAlpha);
+        Debug.Log(completion);
         if (completion >= goodEndingPercentage/100){
-            Debug.Log("Good ending: "+completion);
+            goodEndingScreen.SetActive(true);
         } else if (completion >= normalEndingPercentage/100){
-            Debug.Log("Normal ending: "+completion);
+            normalEndingScreen.SetActive(true);
         } else {
-            Debug.Log("Bad ending: "+completion);
+            badEndingScreen.SetActive(true);
         }
+        
     }
 }

@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
     [Header("Score")]
     [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text finalScoreText;
+    [SerializeField] TMP_Text finalTotalText;
     [Header("Timer")]
     [SerializeField] TMP_Text yearsText;
     [Header("World")]
@@ -30,5 +32,10 @@ public class UIManager : MonoBehaviour
 
     public void UpdateUIPlanet(float newAlpha) {
         burningPlanetImg.color = new Color(burningPlanetImg.color.r, burningPlanetImg.color.g, burningPlanetImg.color.b, newAlpha);
+    }
+
+    public void UpdateUIGameOver(int finalScore, int total){
+        finalScoreText.text = finalScore.ToString();
+        finalTotalText.text = total.ToString();
     }
 }
