@@ -1603,11 +1603,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a42863c6620a85d4a8cf06ad9edf21be, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -19430,6 +19430,7 @@ MonoBehaviour:
   - {fileID: 7734895331479622500, guid: 91cd5ca6ea2be7148a340e94df1618a4, type: 3}
   maxHealth: 3
   minHealth: 1
+  randomizeHealth: 0
   bottomLeft: {x: -16, y: -9, z: 0}
   topRight: {x: 16, y: 9, z: 0}
   initialWait: 8
