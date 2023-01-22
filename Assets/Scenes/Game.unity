@@ -220,7 +220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: you saved the planet!
+  m_text: you saved the earth!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6f2e6a34d84818c43af1e9920947e815, type: 2}
   m_sharedMaterial: {fileID: 5878603774428152274, guid: 6f2e6a34d84818c43af1e9920947e815, type: 2}
