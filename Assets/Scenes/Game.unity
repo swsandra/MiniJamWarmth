@@ -8660,6 +8660,7 @@ GameObject:
   - component: {fileID: 1471617216}
   - component: {fileID: 1471617215}
   - component: {fileID: 1471617217}
+  - component: {fileID: 1471617218}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -8827,7 +8828,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471617210}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -8846,6 +8847,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.28467607}
   m_EdgeRadius: 0
+--- !u!70 &1471617218
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471617210}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0023991722, y: -0.022192003}
+  m_Size: {x: 0.24082905, y: 0.2732172}
+  m_Direction: 0
 --- !u!1 &1471653092
 GameObject:
   m_ObjectHideFlags: 0
@@ -9544,7 +9561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1471617213}
   score: 0
-  goodEndingPercentage: 88
+  goodEndingPercentage: 85
   normalEndingPercentage: 50
   years: 100
   time: 60

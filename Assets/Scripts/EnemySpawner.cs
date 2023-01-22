@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("Health")]
     [SerializeField] int maxHealth;
     [SerializeField] int minHealth;
+    [SerializeField] bool randomizeHealth;
     [Header("Instantiation positions")]
     [SerializeField] Vector3 bottomLeft;
     [SerializeField] Vector3 topRight;
@@ -29,12 +30,10 @@ public class EnemySpawner : MonoBehaviour
     }
 
     void SpawnEnemy(){
-        randomHealth = Random.Range(minHealth, maxHealth+1);
         GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
         float xSize = enemyPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
         float ySize = enemyPrefab.GetComponent<SpriteRenderer>().bounds.size.y;
         Vector2 halfEnemySize = new Vector2(xSize/2, ySize/2);
-        // TODO: fix que no hagan spawn encima de otras fabricas
         bool validPosition = false;
         while (!validPosition){
             validPosition = true;
@@ -43,13 +42,16 @@ public class EnemySpawner : MonoBehaviour
             Collider2D[] cols = Physics2D.OverlapBoxAll(new Vector3(xRandomPos, yRandomPos, 0), halfEnemySize, 0f);
             for (int i=0; i < cols.Length; i++){
                 if (cols[i].CompareTag("Obstacle") || cols[i].CompareTag("Enemy")){ // Check Collision
-                    Debug.Log("Not valid position");
+                    // Debug.Log("Not valid position");
                     validPosition = false;
                 }
             }
         }
         GameObject go = Instantiate(enemyPrefab, new Vector3(xRandomPos, yRandomPos, 0), Quaternion.identity);
-        go.GetComponent<Enemy>().health = randomHealth;
+        if (randomizeHealth){
+            randomHealth = Random.Range(minHealth, maxHealth+1);
+            go.GetComponent<Enemy>().health = randomHealth;
+        }
         GameManager.instance.TotalFactories += 1;
     }
 
