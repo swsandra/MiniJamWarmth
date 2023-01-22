@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     public void Kill(){
         Destroy(gameObject, .1f);
         GameObject go = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        // AudioSource.PlayClipAtPoint(explosionSound, transform.position);
+        AudioSource.PlayClipAtPoint(explosionSound, transform.position);
         GameManager.instance.Score += 1;
     }
 }
