@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed;
-    [SerializeField] float stompRate;
+    // [SerializeField] float stompRate;
     [SerializeField] AudioClip stompSound;
     [SerializeField] AudioSource audioSource;
     SpriteRenderer spriteRenderer;
